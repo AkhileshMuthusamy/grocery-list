@@ -5,9 +5,9 @@ services:
     image: mongo
     container_name: gl-db
     environment:
-      - MONGO_INITDB_DATABASE=default_db
-      - MONGO_INITDB_ROOT_USERNAME=default_user
-      - MONGO_INITDB_ROOT_PASSWORD=default_password
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
     ports: 
       - 27017-27019:27017-27019
   frontend:
@@ -22,9 +22,9 @@ services:
     environment:
       - FLASK_APP=app.py
       - FLASK_RUN_HOST=0.0.0.0
-      - MONGODB_DATABASE=default_db
-      - MONGODB_USERNAME=default_user
-      - MONGODB_PASSWORD=default_password
+      - MONGODB_DATABASE=${DB_NAME}
+      - MONGODB_USERNAME=${DB_USER}
+      - MONGODB_PASSWORD=${DB_PASSWORD}
       - MONGODB_HOSTNAME=mongodb
     ports:
       - 5000:5000
