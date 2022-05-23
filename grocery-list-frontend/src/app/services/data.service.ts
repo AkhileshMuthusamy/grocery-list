@@ -13,7 +13,7 @@ export class DataService {
   private _groceryLists = new BehaviorSubject<GroceryList[] | null>(null);
 
   constructor(private api: ApiService) {
-    this.loadGroceryList();
+    this.loadGroceryLists();
   }
 
   public get isGrocerListsLoading(): boolean {
@@ -24,9 +24,9 @@ export class DataService {
     return this._groceryLists.asObservable();
   }
 
-  loadGroceryList(): void {
+  loadGroceryLists(): void {
     this._isGrocerListsLoading = true;
-    this.api.fetchGroceryList().subscribe({
+    this.api.fetchAllGroceryList().subscribe({
       next: (res: APIResponse<GroceryList[]>) => {
         if ("data" in res) {
           this._groceryLists.next(res.data);

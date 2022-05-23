@@ -17,3 +17,14 @@ export interface APIResponse<T> {
     error: any;
     message: any;
 }
+
+export interface PUTReqGroceryList {
+    _id: string;
+    title: string;
+    color: string;
+}
+
+export interface POSTReqGroceryItem {
+    _id: string;
+    name: string
+}

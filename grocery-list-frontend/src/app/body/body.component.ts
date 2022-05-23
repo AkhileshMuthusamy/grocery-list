@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {GroceryList} from '../objects/global';
@@ -30,7 +30,7 @@ export class BodyComponent implements OnInit, OnDestroy {
   }
 
   openList(list: GroceryList) {
-    this.router.navigateByUrl('/list', {state: list}).then(() => { });
+    this.router.navigate(['list', list._id]).then(() => { });
   }
 
 }

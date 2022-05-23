@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
         if (event.url === '/') {
           this.hideCloseButton = true;
           this.hideAddListButton = false;
-        } else if (event.url === '/list') {
+        } else if (event.url.includes('list')) {
           this.hideCloseButton = false;
           this.hideAddListButton = true;
 

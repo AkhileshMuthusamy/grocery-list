@@ -9,8 +9,12 @@ const routes: Routes = [
     component: BodyComponent
   },
   {
-    path: 'list',
+    path: 'list/:id',
     component: GroceryListComponent
+  },
+  {
+    path: '**',
+    component: BodyComponent
   }
 ];
 

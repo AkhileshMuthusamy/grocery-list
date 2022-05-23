@@ -1,12 +1,15 @@
-<div class="p-3" [style]="{'background-color': groceryListData?.color, 'color': 'white'}">
+<div *ngIf="groceryListData?._id; else loading" class="p-3" [style]="{'background-color': groceryListData?.color, 'color': 'white'}">
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
     <div [formGroup]="groceryListForm" fxLayout="row" fxLayoutAlign="space-between center">
-        <h1 *ngIf="!editMode" fxFlex>{{groceryListData?.title}}</h1>
+        <h1 *ngIf="!editMode" fxFlex class="m-0">{{groceryListData?.title}}</h1>
         <input fxFlex *ngIf="editMode" formControlName="title" type="text" maxlength="255" placeholder="Edit title"/>
     
         <div fxLayout="row">
-            <button mat-icon-button (click)="editMode = !editMode">
-                <mat-icon>{{editMode ? 'check' : 'edit'}}</mat-icon>
+            <button *ngIf="!editMode" mat-icon-button (click)="editMode = !editMode">
+                <mat-icon>edit</mat-icon>
+            </button>     
+            <button *ngIf="editMode" mat-icon-button (click)="updateGroceryList()">
+                <mat-icon>check</mat-icon>
             </button>     
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Color panel">
                 <mat-icon>more_vert</mat-icon>
@@ -22,16 +25,22 @@
     </div>
 
     <ng-container *ngFor="let item of groceryListData?.items">
-        <rideco-grocery-item [item]="item" [listId]="groceryListData?._id"></rideco-grocery-item>
+        <rideco-grocery-item [item]="item" [listId]="groceryListData?._id || ''"></rideco-grocery-item>
     </ng-container>
     <div id="new-grocery-item" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="w-100" fxLayout="row" fxLayoutAlign="start center">
             <mat-icon id="plus-icon">add</mat-icon>
-            <input fxFlex type="text" maxlength="255" placeholder="Add item"/>
+            <input [formControl]="newItem" fxFlex type="text" maxlength="255" placeholder="Add item"/>
         </div>
-        <button mat-icon-button aria-label="Edit item" (click)="true">
+        <button [disabled]="!newItem.value" mat-icon-button aria-label="Edit item" (click)="addItemToGroceryList()">
             <mat-icon>check</mat-icon>
         </button>
     </div>
 
 </div>
+
+<ng-template #loading>
+    <div>
+        Loading...
+    </div>
+</ng-template>
