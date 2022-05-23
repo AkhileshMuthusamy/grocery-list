@@ -1,4 +1,4 @@
 <div fxLayout="row">
-    <button *ngFor="let color of colors" [style]="{'background-color': color}" class="color-block"
-        (click)="selectedColor.emit(color)"></button>
+    <button [ngClass]="{'selected': (i == selected) && emitOnInit}" *ngFor="let color of colors; let i = index"
+        [style]="{'background-color': color}" class="color-block" (click)="emitColor(i)"></button>
 </div>

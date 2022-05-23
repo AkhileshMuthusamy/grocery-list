@@ -15,12 +15,23 @@ export class ColorPaletteComponent implements OnInit {
     '#1D7874',
   ]
 
-  @Input() selected = this.colors[0];
+  @Input() emitOnInit = false;
+  @Input() selected = 0;
   @Output() selectedColor: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+    if (this.emitOnInit) {
+      this.emitColor(0);
+    }
+  }
+
+  emitColor(colorIndex: number) {
+    if (this.colors.length > colorIndex) {
+      this.selected = colorIndex
+      this.selectedColor.emit(this.colors[colorIndex]);
+    }
   }
 
 }

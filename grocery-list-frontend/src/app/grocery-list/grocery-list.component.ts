@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {APIResponse, GroceryList, POSTReqGroceryItem, PUTReqGroceryList} from '../objects/global';
 import {ApiService} from '../services/api.service';
-import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'rideco-grocery-list',

@@ -7,13 +7,8 @@ import {environment} from 'src/environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'grocery-list-frontend';
 
   constructor() {
     console.log(environment.apiURL);
-  }
-
-  dele(v: any) {
-    console.log(v);
   }
 }

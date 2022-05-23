@@ -14,14 +14,15 @@ export class BodyComponent implements OnInit, OnDestroy {
   data!: GroceryList[];
   subscription$!: Subscription;
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(
+    private dataService: DataService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.dataService.loadGroceryLists();
     this.subscription$ = this.dataService.getGroceryLists().subscribe((groceryList: GroceryList[] | null) => {
       if (groceryList) {
         this.data = groceryList;
-        console.log(this.data);
       }
     });
   }

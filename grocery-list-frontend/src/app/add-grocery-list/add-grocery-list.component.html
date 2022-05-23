@@ -1,1 +1,26 @@
-<p>add-grocery-list works!</p>
+<h2 mat-dialog-title>New List</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="p-3">
+    <form [formGroup]="newGroceryListForm" class="w-100">
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" formControlName="title" />
+            <mat-error *ngIf="f['title'].invalid && (f['title'].dirty || f['title'].touched)">
+                Required
+            </mat-error>
+        </mat-form-field>
+        <div class="py-2">
+            <rideco-color-palette [emitOnInit]="true" (selectedColor)="updateColor($event)"></rideco-color-palette>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button class="ml-3" (click)="addNewList()" [disabled]="isLoading" mat-raised-button color="accent">
+        <mat-icon *ngIf="isLoading">
+            <mat-spinner color="warn" diameter="20"></mat-spinner>
+        </mat-icon>
+        Submit
+    </button>
+</mat-dialog-actions>

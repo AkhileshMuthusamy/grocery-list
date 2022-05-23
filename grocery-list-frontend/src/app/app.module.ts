@@ -5,10 +5,15 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -21,7 +26,6 @@ import {FooterComponent} from './footer/footer.component';
 import {GroceryItemComponent} from './grocery-item/grocery-item.component';
 import {GroceryListComponent} from './grocery-list/grocery-list.component';
 import {HeaderComponent} from './header/header.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -35,21 +39,25 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     BodyComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    BrowserModule,
     FlexLayoutModule,
     HttpClientModule,
     MatButtonModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatMenuModule,
+    MatDividerModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
     MatTooltipModule,
     ReactiveFormsModule,
-    MatProgressBarModule,
-    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
