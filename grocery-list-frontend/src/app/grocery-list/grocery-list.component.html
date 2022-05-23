@@ -1,23 +1,33 @@
 <div class="p-3" [style]="{'background-color': data.color, 'color': 'white'}">
-    <mat-progress-bar mode="buffer" color="accent"></mat-progress-bar>
-    <div fxLayout="row">
-        <h1 fxFlex>{{data.title}}</h1>
+    <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+    <div [formGroup]="groceryListForm" fxLayout="row" fxLayoutAlign="space-between center">
+        <h1 *ngIf="!editMode" fxFlex>{{data.title}}</h1>
+        <input fxFlex *ngIf="editMode" formControlName="title" type="text" maxlength="255" placeholder="Edit title"/>
     
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Color panel">
-            <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-            <rideco-color-palette (selectedColor)="data.color = $event"></rideco-color-palette>
-        </mat-menu>
+        <div fxLayout="row">
+            <button mat-icon-button (click)="editMode = !editMode">
+                <mat-icon>{{editMode ? 'check' : 'edit'}}</mat-icon>
+            </button>     
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Color panel">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <rideco-color-palette (selectedColor)="updateColor($event)"></rideco-color-palette>
+                <button mat-menu-item (click)="true">
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete list</span>
+                  </button>
+            </mat-menu>
+        </div>
     </div>
 
     <ng-container *ngFor="let item of data.items">
         <rideco-grocery-item [item]="item" [listId]="data._id"></rideco-grocery-item>
     </ng-container>
     <div id="new-grocery-item" fxLayout="row" fxLayoutAlign="space-between center">
-        <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="w-100" fxLayout="row" fxLayoutAlign="start center">
             <mat-icon id="plus-icon">add</mat-icon>
-            <input type="text" maxlength="255" placeholder="Add item"/>
+            <input fxFlex type="text" maxlength="255" placeholder="Add item"/>
         </div>
         <button mat-icon-button aria-label="Edit item" (click)="true">
             <mat-icon>check</mat-icon>

@@ -1,9 +1,11 @@
 <div [formGroup]="groceryItemForm" fxLayout="row" fxLayoutAlign="space-between center">
     <mat-checkbox fxFlex formControlName="purchased"> 
         <ng-container *ngIf="!editMode">
-            {{groceryItemForm.controls['name'].value}}
+            <span [ngClass]="{'strike': groceryItemForm.controls['purchased'].value}">
+                {{groceryItemForm.controls['name'].value}}
+            </span>
         </ng-container>
-        <input [fxHide]="!editMode" formControlName="name" type="text" maxlength="255"/>
+        <input [fxHide]="!editMode" formControlName="name" type="text" maxlength="255" placeholder="Edit item"/>
     </mat-checkbox>
     <div>
         <button mat-icon-button aria-label="Edit item" (click)="editMode = !editMode">

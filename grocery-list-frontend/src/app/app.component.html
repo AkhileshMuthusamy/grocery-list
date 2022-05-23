@@ -1,5 +1,8 @@
 <!-- <div class="p-0 h-100">
   <router-outlet></router-outlet>
 </div> -->
-<rideco-grocery-list></rideco-grocery-list>
-<rideco-color-palette (selectedColor)="dele($event)"></rideco-color-palette>
+
+<div ngClass.gt-xs="container">
+  <rideco-header></rideco-header>
+  <rideco-grocery-list></rideco-grocery-list>
+</div>

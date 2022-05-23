@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {GroceryList} from '../objects/global';
 
 @Component({
@@ -11,7 +12,7 @@ export class GroceryListComponent implements OnInit {
   data: GroceryList = {
     _id: '1',
     title: 'Costco',
-    color: '#d3e4f0',
+    color: '#355070',
     items: [
       {
         id: '1',
@@ -20,9 +21,27 @@ export class GroceryListComponent implements OnInit {
       }
     ]
   }
-  constructor() { }
+
+  groceryListForm!: FormGroup;
+
+  editMode = false;
+
+  constructor(private fb: FormBuilder) {
+    this.groceryListForm = this.fb.group({
+      _id: [''],
+      title: [''],
+      color: ''
+    });
+  }
 
   ngOnInit(): void {
+    this.groceryListForm.patchValue(this.data);
+  }
+
+  updateColor(color: string): void {
+    if (color){
+      this.groceryListForm.controls['color'].setValue(color);
+    }
   }
 
 }
