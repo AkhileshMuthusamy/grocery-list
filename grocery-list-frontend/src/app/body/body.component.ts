@@ -17,6 +17,7 @@ export class BodyComponent implements OnInit, OnDestroy {
   constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
+    this.dataService.loadGroceryLists();
     this.subscription$ = this.dataService.getGroceryLists().subscribe((groceryList: GroceryList[] | null) => {
       if (groceryList) {
         this.data = groceryList;

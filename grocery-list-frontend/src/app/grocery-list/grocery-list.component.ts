@@ -27,8 +27,7 @@ export class GroceryListComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private api: ApiService,
-    private snackBar: MatSnackBar,
-    private dataService: DataService) {
+    private snackBar: MatSnackBar) {
     this.groceryListForm = this.fb.group({
       _id: [''],
       title: [''],
@@ -90,7 +89,6 @@ export class GroceryListComponent implements OnInit, OnDestroy {
           if ("error" in res) {
             this.snackBar.open('Unable to delete list', 'Close', {duration: 2000});
             this.isLoading = false;
-            this.dataService.loadGroceryLists();
           }
         },
         complete: () => {
@@ -117,7 +115,6 @@ export class GroceryListComponent implements OnInit, OnDestroy {
           } else if ("data" in res) {
             if (res.data['modified_count'] > 0) {
               this.getGroceryList(this.groceryListData._id);
-              this.dataService.loadGroceryLists();
             }
           }
         },
