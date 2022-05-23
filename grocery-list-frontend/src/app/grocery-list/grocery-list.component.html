@@ -1,5 +1,5 @@
 <div class="p-3" [style]="{'background-color': groceryListData?.color, 'color': 'white'}">
-    <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
     <div [formGroup]="groceryListForm" fxLayout="row" fxLayoutAlign="space-between center">
         <h1 *ngIf="!editMode" fxFlex>{{groceryListData?.title}}</h1>
         <input fxFlex *ngIf="editMode" formControlName="title" type="text" maxlength="255" placeholder="Edit title"/>
@@ -13,7 +13,7 @@
             </button>
             <mat-menu #menu="matMenu">
                 <rideco-color-palette (selectedColor)="updateColor($event)"></rideco-color-palette>
-                <button mat-menu-item (click)="true">
+                <button mat-menu-item (click)="deleteGroceryList()">
                     <mat-icon>delete</mat-icon>
                     <span>Delete list</span>
                   </button>

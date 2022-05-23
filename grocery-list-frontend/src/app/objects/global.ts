@@ -8,7 +8,8 @@ export interface GroceryList {
     _id: string;
     title: string;
     color: string;
-    items: GroceryItem[];
+    items?: GroceryItem[];
+    last_updated: string;
 }
 
 export interface APIResponse<T> {

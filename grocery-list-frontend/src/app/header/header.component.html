@@ -3,11 +3,11 @@
         <mat-icon>local_mall</mat-icon>
         <h1 class="m-0 pl-2">Grocery List</h1>
     </div>
-    <button class="ml-3" (click)="true" [disabled]="false" mat-button>
+    <button [fxHide]="hideAddListButton" class="ml-3" (click)="true" mat-button>
         <mat-icon>add</mat-icon>
         Add List
     </button>
-    <button class="ml-3" (click)="true" [disabled]="false" mat-button>
+    <button [fxHide]="hideCloseButton" class="ml-3" (click)="navigateHome()" mat-button>
         <mat-icon>close</mat-icon>
         Close
     </button>

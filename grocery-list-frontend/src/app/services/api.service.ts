@@ -16,4 +16,16 @@ export class ApiService {
   fetchGroceryList(): Observable<APIResponse<GroceryList[]>> {
     return this.http.get<APIResponse<GroceryList[]>>(`${this.apiURL}/grocery-list`);
   }
+
+  addNewGroceryList(data: GroceryList): Observable<APIResponse<any>> {
+    return this.http.post<APIResponse<any>>(`${this.apiURL}/grocery-list`, data);
+  }
+
+  deleteGroceryList(_id: string) {
+    return this.http.delete<APIResponse<any>>(`${this.apiURL}/grocery-list?_id=${_id}`);
+  }
+
+  // addItemToGroceryList(): Observable<APIResponse<any>> {
+  //   return this.http.post<APIResponse<any>>()
+  // }
 }

@@ -21,6 +21,7 @@ import {FooterComponent} from './footer/footer.component';
 import {GroceryItemComponent} from './grocery-item/grocery-item.component';
 import {GroceryListComponent} from './grocery-list/grocery-list.component';
 import {HeaderComponent} from './header/header.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {HeaderComponent} from './header/header.component';
     MatListModule,
     MatTooltipModule,
     ReactiveFormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

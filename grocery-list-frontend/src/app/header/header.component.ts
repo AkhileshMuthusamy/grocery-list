@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'rideco-header',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  hideCloseButton = true;
+  hideAddListButton = false;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (event.url === '/') {
+          this.hideCloseButton = true;
+          this.hideAddListButton = false;
+        } else if (event.url === '/list') {
+          this.hideCloseButton = false;
+          this.hideAddListButton = true;
+
+        }
+        console.log(event.url)
+      }
+    });
+  }
+
+  navigateHome(): void {
+    this.router.navigate(['/']);
   }
 
 }
