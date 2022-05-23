@@ -1,0 +1,16 @@
+<div [formGroup]="groceryItemForm" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-checkbox fxFlex formControlName="purchased"> 
+        <ng-container *ngIf="!editMode">
+            {{groceryItemForm.controls['name'].value}}
+        </ng-container>
+        <input [fxHide]="!editMode" formControlName="name" type="text" maxlength="255"/>
+    </mat-checkbox>
+    <div>
+        <button mat-icon-button aria-label="Edit item" (click)="editMode = !editMode">
+            <mat-icon>{{ editMode ? 'check': 'edit'}}</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Delete item" (click)="true">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+</div>

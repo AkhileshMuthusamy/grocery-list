@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'rideco-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'grocery-list-frontend';
+
+  constructor() {
+    console.log(environment.apiURL);
+  }
+
+  dele(v: any) {
+    console.log(v);
+  }
 }

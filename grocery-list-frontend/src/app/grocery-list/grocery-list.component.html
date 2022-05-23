@@ -1,0 +1,27 @@
+<div class="p-3" [style]="{'background-color': data.color, 'color': 'white'}">
+    <mat-progress-bar mode="buffer" color="accent"></mat-progress-bar>
+    <div fxLayout="row">
+        <h1 fxFlex>{{data.title}}</h1>
+    
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Color panel">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <rideco-color-palette (selectedColor)="data.color = $event"></rideco-color-palette>
+        </mat-menu>
+    </div>
+
+    <ng-container *ngFor="let item of data.items">
+        <rideco-grocery-item [item]="item" [listId]="data._id"></rideco-grocery-item>
+    </ng-container>
+    <div id="new-grocery-item" fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon id="plus-icon">add</mat-icon>
+            <input type="text" maxlength="255" placeholder="Add item"/>
+        </div>
+        <button mat-icon-button aria-label="Edit item" (click)="true">
+            <mat-icon>check</mat-icon>
+        </button>
+    </div>
+
+</div>
