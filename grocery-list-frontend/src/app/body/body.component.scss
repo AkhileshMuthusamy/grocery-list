@@ -1,0 +1,10 @@
+
+.list-card {
+    border-radius: 5px;
+    padding: 16px;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(95%);
+    }
+}

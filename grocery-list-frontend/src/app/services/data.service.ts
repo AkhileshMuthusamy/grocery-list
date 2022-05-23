@@ -8,35 +8,35 @@ import {ApiService} from './api.service';
 })
 export class DataService {
 
-  private _isGrocerListLoading = false;
+  private _isGrocerListsLoading = false;
 
-  private _groceryList = new BehaviorSubject<GroceryList | null>(null);
+  private _groceryLists = new BehaviorSubject<GroceryList[] | null>(null);
 
   constructor(private api: ApiService) {
     this.loadGroceryList();
   }
 
-  public get isGrocerListLoading(): boolean {
-    return this._isGrocerListLoading;
+  public get isGrocerListsLoading(): boolean {
+    return this._isGrocerListsLoading;
   }
 
-  public getGroceryList(): Observable<GroceryList | null> {
-    return this._groceryList.asObservable();
+  public getGroceryLists(): Observable<GroceryList[] | null> {
+    return this._groceryLists.asObservable();
   }
 
   loadGroceryList(): void {
-    this._isGrocerListLoading = true;
+    this._isGrocerListsLoading = true;
     this.api.fetchGroceryList().subscribe({
-      next: (res: APIResponse<GroceryList>) => {
+      next: (res: APIResponse<GroceryList[]>) => {
         if ("data" in res) {
-          this._groceryList.next(res.data);
+          this._groceryLists.next(res.data);
         }
       },
       complete: () => {
-        this._isGrocerListLoading = false;
+        this._isGrocerListsLoading = false;
       },
       error: () => {
-        this._isGrocerListLoading = false;
+        this._isGrocerListsLoading = false;
       }
     });
   }

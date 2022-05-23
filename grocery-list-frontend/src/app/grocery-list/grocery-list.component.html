@@ -1,7 +1,7 @@
-<div class="p-3" [style]="{'background-color': data.color, 'color': 'white'}">
+<div class="p-3" [style]="{'background-color': groceryListData?.color, 'color': 'white'}">
     <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
     <div [formGroup]="groceryListForm" fxLayout="row" fxLayoutAlign="space-between center">
-        <h1 *ngIf="!editMode" fxFlex>{{data.title}}</h1>
+        <h1 *ngIf="!editMode" fxFlex>{{groceryListData?.title}}</h1>
         <input fxFlex *ngIf="editMode" formControlName="title" type="text" maxlength="255" placeholder="Edit title"/>
     
         <div fxLayout="row">
@@ -21,8 +21,8 @@
         </div>
     </div>
 
-    <ng-container *ngFor="let item of data.items">
-        <rideco-grocery-item [item]="item" [listId]="data._id"></rideco-grocery-item>
+    <ng-container *ngFor="let item of groceryListData?.items">
+        <rideco-grocery-item [item]="item" [listId]="groceryListData?._id"></rideco-grocery-item>
     </ng-container>
     <div id="new-grocery-item" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="w-100" fxLayout="row" fxLayoutAlign="start center">

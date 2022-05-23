@@ -13,7 +13,7 @@ export class ApiService {
   
   constructor(private http: HttpClient) { }
 
-  fetchGroceryList(): Observable<APIResponse<GroceryList>> {
-    return this.http.get<APIResponse<GroceryList>>(`${this.apiURL}/grocery-list`);
+  fetchGroceryList(): Observable<APIResponse<GroceryList[]>> {
+    return this.http.get<APIResponse<GroceryList[]>>(`${this.apiURL}/grocery-list`);
   }
 }

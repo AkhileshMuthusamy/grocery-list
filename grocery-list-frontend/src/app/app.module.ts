@@ -15,6 +15,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AddGroceryListComponent} from './add-grocery-list/add-grocery-list.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {BodyComponent} from './body/body.component';
 import {ColorPaletteComponent} from './color-palette/color-palette.component';
 import {FooterComponent} from './footer/footer.component';
 import {GroceryItemComponent} from './grocery-item/grocery-item.component';
@@ -29,7 +30,8 @@ import {HeaderComponent} from './header/header.component';
     GroceryItemComponent,
     AddGroceryListComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BodyComponent
   ],
   imports: [
     BrowserModule,

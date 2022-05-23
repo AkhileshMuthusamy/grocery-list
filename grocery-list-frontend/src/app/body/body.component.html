@@ -1,0 +1,7 @@
+<div>
+    <ng-container *ngFor="let list of data">
+        <div class="list-card" [style]="{'background-color': list?.color, 'color': 'white'}" (click)="openList(list)">
+            <h1 fxFlex>{{list.title}}</h1>
+        </div>
+    </ng-container>
+</div>

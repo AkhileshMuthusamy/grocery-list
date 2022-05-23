@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
 import {GroceryList} from '../objects/global';
 
 @Component({
@@ -9,34 +10,33 @@ import {GroceryList} from '../objects/global';
 })
 export class GroceryListComponent implements OnInit {
 
-  data: GroceryList = {
-    _id: '1',
-    title: 'Costco',
-    color: '#355070',
-    items: [
-      {
-        id: '1',
-        name: 'Milk',
-        purchased: false
-      }
-    ]
-  }
+  groceryListData!: GroceryList | { [k: string]: any; };
 
   groceryListForm!: FormGroup;
 
   editMode = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.groceryListForm = this.fb.group({
       _id: [''],
       title: [''],
       color: ''
     });
+
+
+    let stateData = this.router.getCurrentNavigation()?.extras.state;
+    if (stateData) {
+      this.groceryListData = stateData;
+      this.groceryListForm.patchValue(stateData);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit(): void {
-    this.groceryListForm.patchValue(this.data);
   }
+
+  get f(): any { return this.groceryListForm.controls; }
 
   updateColor(color: string): void {
     if (color){
