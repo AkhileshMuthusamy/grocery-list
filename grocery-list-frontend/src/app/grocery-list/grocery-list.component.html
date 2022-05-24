@@ -1,46 +1,48 @@
-<div *ngIf="groceryListData?._id; else loading" class="p-3" [style]="{'background-color': groceryListData?.color, 'color': 'white'}">
-    <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
-    <div [formGroup]="groceryListForm" fxLayout="row" fxLayoutAlign="space-between center">
-        <h1 *ngIf="!editMode" fxFlex class="m-0">{{groceryListData?.title}}</h1>
-        <input fxFlex *ngIf="editMode" formControlName="title" type="text" maxlength="255" placeholder="Edit title"/>
-    
-        <div fxLayout="row">
-            <button *ngIf="!editMode" mat-icon-button (click)="editMode = !editMode">
-                <mat-icon>edit</mat-icon>
-            </button>     
-            <button *ngIf="editMode" mat-icon-button (click)="updateGroceryList()">
+<div class="p-2">
+    <div *ngIf="groceryListData?._id; else loading" class="p-3 card" [style]="{'background-color': groceryListData?.color, 'color': 'white'}">
+        <!-- Progress bar to indicate API fetch, update, delete -->
+        <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
+        <div [formGroup]="groceryListForm" fxLayout="row" fxLayoutAlign="space-between center">
+            <h1 *ngIf="!editMode" fxFlex class="m-0 card-title">{{groceryListData?.title}}</h1>
+            <input fxFlex="1 1 calc(100% - 80px)" *ngIf="editMode" formControlName="title" type="text" maxlength="255" placeholder="Edit title"/>
+        
+            <div fxFlex="80px" fxLayout="row">
+                <button *ngIf="!editMode" mat-icon-button (click)="editMode = !editMode">
+                    <mat-icon>edit</mat-icon>
+                </button>     
+                <button *ngIf="editMode" mat-icon-button (click)="updateGroceryList()">
+                    <mat-icon>check</mat-icon>
+                </button>     
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Color panel">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <rideco-color-palette (selectedColor)="updateColor($event)"></rideco-color-palette>
+                    <button mat-menu-item (click)="deleteGroceryList()">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete list</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+
+        <ng-container *ngFor="let item of groceryListData?.items">
+            <rideco-grocery-item [item]="item" [listId]="groceryListData?._id || ''" (updated)="getGroceryList(groceryListData._id)"></rideco-grocery-item>
+        </ng-container>
+        <div id="new-grocery-item" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="w-100" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon id="plus-icon">add</mat-icon>
+                <input [formControl]="newItem" fxFlex type="text" maxlength="255" placeholder="Add item"/>
+            </div>
+            <button [disabled]="!newItem.value" mat-icon-button aria-label="Edit item" (click)="addItemToGroceryList()">
                 <mat-icon>check</mat-icon>
-            </button>     
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Color panel">
-                <mat-icon>more_vert</mat-icon>
             </button>
-            <mat-menu #menu="matMenu">
-                <rideco-color-palette (selectedColor)="updateColor($event)"></rideco-color-palette>
-                <button mat-menu-item (click)="deleteGroceryList()">
-                    <mat-icon>delete</mat-icon>
-                    <span>Delete list</span>
-                  </button>
-            </mat-menu>
         </div>
     </div>
-
-    <ng-container *ngFor="let item of groceryListData?.items">
-        <rideco-grocery-item [item]="item" [listId]="groceryListData?._id || ''" (updated)="getGroceryList(groceryListData._id)"></rideco-grocery-item>
-    </ng-container>
-    <div id="new-grocery-item" fxLayout="row" fxLayoutAlign="space-between center">
-        <div class="w-100" fxLayout="row" fxLayoutAlign="start center">
-            <mat-icon id="plus-icon">add</mat-icon>
-            <input [formControl]="newItem" fxFlex type="text" maxlength="255" placeholder="Add item"/>
-        </div>
-        <button [disabled]="!newItem.value" mat-icon-button aria-label="Edit item" (click)="addItemToGroceryList()">
-            <mat-icon>check</mat-icon>
-        </button>
-    </div>
-
 </div>
 
 <ng-template #loading>
-    <div>
-        Loading...
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <span>Loading...</span>
     </div>
 </ng-template>

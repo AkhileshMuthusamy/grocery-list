@@ -32,3 +32,13 @@ input {
         }
     }
 }
+
+.card {
+    border-radius: 5px;
+
+    .card-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
