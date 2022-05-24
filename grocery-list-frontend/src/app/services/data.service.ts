@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {APIResponse, GroceryList} from '../objects/global';
 import {ApiService} from './api.service';
@@ -12,8 +13,7 @@ export class DataService {
 
   private _groceryLists = new BehaviorSubject<GroceryList[] | null>(null);
 
-  constructor(private api: ApiService) {
-    this.loadGroceryLists();
+  constructor(private api: ApiService, private snackBar: MatSnackBar) {
   }
 
   public get isGrocerListsLoading(): boolean {
@@ -35,8 +35,9 @@ export class DataService {
       complete: () => {
         this._isGrocerListsLoading = false;
       },
-      error: () => {
+      error: (err) => {
         this._isGrocerListsLoading = false;
+        this.snackBar.open('Server error :(', 'Close', {duration: 5000});
       }
     });
   }
