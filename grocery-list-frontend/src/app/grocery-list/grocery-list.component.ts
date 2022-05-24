@@ -27,14 +27,16 @@ export class GroceryListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private api: ApiService,
     private snackBar: MatSnackBar) {
-    this.groceryListForm = this.fb.group({
-      _id: [''],
-      title: [''],
-      color: ['']
-    });
+      // Initialize form
+      this.groceryListForm = this.fb.group({
+        _id: [''],
+        title: [''],
+        color: ['']
+      });
   }
 
   ngOnInit(): void {
+    // Receive grocery item id from the route parameter and load the data from API
     this.subscription$ = this.route.params.subscribe(params => {
       if (params['id']) {
         this.getGroceryList(params['id']);
@@ -43,11 +45,13 @@ export class GroceryListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // Close all subscriptions when component gets destroyed to prevent memory leak
     this.subscription$.unsubscribe();
   }
 
   get f(): any {return this.groceryListForm.controls;}
 
+  /** Change background-color of the grocery list */
   updateColor(color: string): void {
     if (color) {
       this.groceryListForm.controls['color'].setValue(color);
@@ -56,7 +60,7 @@ export class GroceryListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Fetch grocery list by matching the _id
+   * Fetch grocery items by matching the _id of the grocery list
    * @param _id Unique id of grocery list
    */
   getGroceryList(_id: string): void {
@@ -79,49 +83,7 @@ export class GroceryListComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteGroceryList(): void {
-    if (this.groceryListData?._id) {
-      this.isLoading = true;
-      this.api.deleteGroceryList(this.groceryListData._id).subscribe({
-        next: (res) => {
-          if ("error" in res) {
-            this.snackBar.open('Unable to delete list', 'Close', {duration: 2000});
-          }
-        },
-        complete: () => {
-          this.isLoading = false;
-          this.router.navigate(['/']);
-        }
-      })
-    }
-  }
-
-  updateGroceryList(): void {
-    if (this.groceryListData?._id) {
-      this.isLoading = true;
-      const reqData: PUTReqGroceryList = {
-        _id: this.groceryListData._id,
-        color: this.f['color'].value,
-        title: this.f['title'].value
-      }
-      this.api.updateGroceryList(reqData).subscribe({
-        next: (res) => {
-          if ("error" in res) {
-            this.snackBar.open('Unable to update list', 'Close', {duration: 2000});
-          } else if ("data" in res) {
-            if (res.data['modified_count'] > 0) {
-              this.getGroceryList(this.groceryListData._id);
-            }
-          }
-        },
-        complete: () => {
-          this.editMode = false;
-          this.isLoading = false;
-        }
-      })
-    }
-  }
-
+  /** Add item to the grocery list */
   addItemToGroceryList(): void {
     if (this.groceryListData?._id && this.newItem.value) {
       this.isLoading = true;
@@ -141,9 +103,69 @@ export class GroceryListComponent implements OnInit, OnDestroy {
             }
           }
         },
+        error: () => {
+          this.isLoading = false;
+          // Notify user on API failure
+          this.snackBar.open('Unable to add item to list', 'Close', {duration: 2000});
+        },
         complete: () => {
           this.editMode = false;
           this.isLoading = false;
+        }
+      })
+    }
+  }
+
+  /** Update the grocery list title and color */
+  updateGroceryList(): void {
+    if (this.groceryListData?._id) {
+      this.isLoading = true;
+      const reqData: PUTReqGroceryList = {
+        _id: this.groceryListData._id,
+        color: this.f['color'].value,
+        title: this.f['title'].value
+      }
+      this.api.updateGroceryList(reqData).subscribe({
+        next: (res) => {
+          if ("error" in res) {
+            this.snackBar.open('Unable to update list', 'Close', {duration: 2000});
+          } else if ("data" in res) {
+            if (res.data['modified_count'] > 0) {
+              this.getGroceryList(this.groceryListData._id);
+            }
+          }
+        },
+        error: () => {
+          this.isLoading = false;
+          // Notify user on API failure
+          this.snackBar.open('Unable to update list', 'Close', {duration: 2000});
+        },
+        complete: () => {
+          this.editMode = false;
+          this.isLoading = false;
+        }
+      })
+    }
+  }
+
+  /** Delete the grocery list permanently */
+  deleteGroceryList(): void {
+    if (this.groceryListData?._id) {
+      this.isLoading = true;
+      this.api.deleteGroceryList(this.groceryListData._id).subscribe({
+        next: (res) => {
+          if ("error" in res) {
+            this.snackBar.open('Unable to delete list', 'Close', {duration: 2000});
+          }
+        },
+        error: () => {
+          this.isLoading = false;
+          // Notify user on API failure
+          this.snackBar.open('Unable to delete list', 'Close', {duration: 2000});
+        },
+        complete: () => {
+          this.isLoading = false;
+          this.router.navigate(['/']);
         }
       })
     }

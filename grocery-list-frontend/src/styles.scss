@@ -12,6 +12,7 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+// Update input box placeholder color based to theme
 ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: rgb(207, 207, 207);
@@ -24,6 +25,7 @@ body {
     color: rgb(207, 207, 207);;
 }
 
+// Update material checkbox label width
 .mat-checkbox-layout,
 .mat-checkbox-label {
     width: 98% !important;

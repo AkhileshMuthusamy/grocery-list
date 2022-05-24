@@ -13,12 +13,12 @@ export class AddGroceryListComponent implements OnInit {
 
   isLoading = false;
   newGroceryListForm!: FormGroup;
-  
+
   constructor(
     private api: ApiService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddGroceryListComponent>,) {
-    // Disabled dialog close when clicked outside
+    // Disabled dialog close action when clicked outside
     dialogRef.disableClose = true;
     this.createForm();
   }
@@ -33,14 +33,20 @@ export class AddGroceryListComponent implements OnInit {
     });
   }
 
-  get f(): any { return this.newGroceryListForm.controls; }
+  /** Getter method to return form control */
+  get f(): any {return this.newGroceryListForm.controls;}
 
+  /**
+   * Update color value in form when user selects color from palette
+   * @param color CSS hex color as string
+   */
   updateColor(color: string): void {
     if (color) {
       this.newGroceryListForm.controls['color'].setValue(color);
     }
   }
 
+  /** Request API to add new grocery list */
   addNewList(): void {
     this.newGroceryListForm.markAllAsTouched();  // Mark all the field as touched to show errors.
     if (this.newGroceryListForm.valid) {

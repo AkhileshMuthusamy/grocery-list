@@ -1,8 +1,11 @@
+<!-- Header -->
 <div class="pl-3 py-3" fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>local_mall</mat-icon>
         <h1 class="m-0 pl-2">Grocery List</h1>
     </div>
+
+    <!-- Switch between 'Add list' and 'Close' button based on route -->
     <button [fxHide]="hideAddListButton" class="ml-3" (click)="openAddNewListDialog()" mat-button>
         <mat-icon>add</mat-icon>
         Add List

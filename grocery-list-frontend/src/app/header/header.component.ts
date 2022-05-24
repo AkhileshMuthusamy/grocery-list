@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    // Switch between 'Add list' and 'Close' button based on route
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.url === '/') {
@@ -34,11 +35,13 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  // Open dialog box to add new list
   openAddNewListDialog(): void {
     const dialogRef = this.dialog.open(AddGroceryListComponent, {
       width: '350px'
     });
 
+    // Reload data when dialog is closed
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'SUCCESS') {
         this.dataService.loadGroceryLists();
@@ -46,6 +49,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  // Navigate to home route
   navigateHome(): void {
     this.router.navigate(['/']);
   }

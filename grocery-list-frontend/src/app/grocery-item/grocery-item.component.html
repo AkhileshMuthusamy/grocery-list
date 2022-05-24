@@ -1,5 +1,8 @@
+<!-- Contains view of grocery item -->
 <div [formGroup]="groceryItemForm" fxLayout="row" fxLayoutAlign="space-between center">
+    <!-- Checkbox to indicate if user purchased the item -->
     <mat-checkbox fxFlex formControlName="purchased"> 
+        <!-- Conditionally switch between label and input box -->
         <ng-container *ngIf="!editMode">
             <span [ngClass]="{'strike': groceryItemForm.controls['purchased'].value}">
                 {{groceryItemForm.controls['name'].value}}
@@ -7,17 +10,21 @@
         </ng-container>
         <input [fxHide]="!editMode" class="w-100" formControlName="name" type="text" maxlength="255" placeholder="Edit item"/>
     </mat-checkbox>
+
+    <!-- Action buttons -->
     <div>
+        <!-- Enable input box to edit grocery item -->
         <button *ngIf="!editMode" mat-icon-button (click)="editMode = !editMode" matTooltip="Edit item">
             <mat-icon>edit</mat-icon>
         </button>     
+        <!-- Save grocery item -->
         <button *ngIf="editMode" [disabled]="isLoading" mat-icon-button (click)="updateGroceryItem()" matTooltip="Save item">
             <mat-icon *ngIf="!isLoading">check</mat-icon>
             <mat-icon *ngIf="isLoading">
                 <mat-spinner color="warn" diameter="20"></mat-spinner>
             </mat-icon>
-            
         </button>
+        <!-- Delete grocery item -->
         <button mat-icon-button aria-label="Delete item" (click)="deleteGroceryItem()" matTooltip="Delete item">
             <mat-icon>delete</mat-icon>
         </button>

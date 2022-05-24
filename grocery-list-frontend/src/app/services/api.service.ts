@@ -9,9 +9,12 @@ import {APIResponse, GroceryList, POSTReqGroceryItem, PUTReqGroceryItem, PUTReqG
 })
 export class ApiService {
 
+  // Backend API url
   private readonly apiURL = environment.apiURL;
   
   constructor(private http: HttpClient) { }
+
+  // Grocery list endpoints
 
   fetchAllGroceryList(): Observable<APIResponse<GroceryList[]>> {
     return this.http.get<APIResponse<GroceryList[]>>(`${this.apiURL}/grocery-list`);
@@ -32,6 +35,8 @@ export class ApiService {
   deleteGroceryList(_id: string) {
     return this.http.delete<APIResponse<any>>(`${this.apiURL}/grocery-list?_id=${_id}`);
   }
+
+  // Grocery item endpoints
 
   addItemToGroceryList(data: POSTReqGroceryItem): Observable<APIResponse<any>> {
     return this.http.post<APIResponse<any>>(`${this.apiURL}/grocery-item`, data)

@@ -1,4 +1,6 @@
 <div class="p-2">
+
+    <!-- Create block for each grocery list -->
     <ng-container *ngFor="let list of data">
         <div class="list-card" [style]="{'background-color': list?.color, 'color': 'white'}" (click)="openList(list)">
             <div>
@@ -8,9 +10,13 @@
             <span>Last updated: {{list.last_updated | date:'medium'}}</span>
         </div>
     </ng-container>
+
+    <!-- Display text if list is empty -->
     <div *ngIf="(!data || data?.length == 0) && !dataService.isGrocerListsLoading" class="no-records">
         <span>No list to display.</span>
     </div>
+    
+    <!-- Display loading message -->
     <div *ngIf="dataService.isGrocerListsLoading" class="no-records">
         <span>Connecting to the server...</span>
         <br />

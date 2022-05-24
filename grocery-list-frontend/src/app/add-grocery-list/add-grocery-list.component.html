@@ -1,7 +1,11 @@
+<!-- Dialog box to add new grocery list -->
+
 <h2 mat-dialog-title>New List</h2>
 <mat-divider></mat-divider>
 <mat-dialog-content class="p-3">
     <form [formGroup]="newGroceryListForm" class="w-100">
+
+        <!-- Input box to receive title from user -->
         <mat-form-field appearance="fill" class="w-100">
             <mat-label>Title</mat-label>
             <input matInput type="text" formControlName="title" />
@@ -9,6 +13,9 @@
                 Required
             </mat-error>
         </mat-form-field>
+
+        <!-- Color picker palette to select color for grocery list -->
+        <!-- By default fist color in the list is selected -->
         <div class="py-2">
             <rideco-color-palette [emitOnInit]="true" (selectedColor)="updateColor($event)"></rideco-color-palette>
         </div>
@@ -17,6 +24,8 @@
 <mat-divider></mat-divider>
 <mat-dialog-actions align="end">
     <button mat-raised-button mat-dialog-close>Cancel</button>
+
+    <!-- Submit button -->
     <button class="ml-3" (click)="addNewList()" [disabled]="isLoading" mat-raised-button color="accent">
         <mat-icon *ngIf="isLoading">
             <mat-spinner color="warn" diameter="20"></mat-spinner>

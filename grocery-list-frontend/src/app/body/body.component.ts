@@ -28,9 +28,14 @@ export class BodyComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // Close all subscriptions when component gets destroyed to prevent memory leak
     this.subscription$.unsubscribe();
   }
 
+  /**
+   * Navigate to view grocery items in the list
+   * @param list Instance of grocery list to view
+   */
   openList(list: GroceryList) {
     this.router.navigate(['list', list._id]).then(() => { });
   }

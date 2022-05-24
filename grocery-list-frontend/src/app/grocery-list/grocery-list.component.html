@@ -1,18 +1,26 @@
+<!-- Grocery list view -->
 <div class="p-2">
+    <!-- Changes background color of the list dynamically -->
     <div *ngIf="groceryListData?._id; else loading" class="p-3 card" [style]="{'background-color': groceryListData?.color, 'color': 'white'}">
         <!-- Progress bar to indicate API fetch, update, delete -->
         <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
+
         <div [formGroup]="groceryListForm" fxLayout="row" fxLayoutAlign="space-between center">
+            <!-- Switch view between label and input box -->
             <h1 *ngIf="!editMode" fxFlex class="m-0 card-title">{{groceryListData?.title}}</h1>
             <input fxFlex="1 1 calc(100% - 80px)" *ngIf="editMode" formControlName="title" type="text" maxlength="255" placeholder="Edit title"/>
-        
+            
+            <!-- Grocery list action buttons -->
             <div fxFlex="80px" fxLayout="row">
+                <!-- Switch view between edit and save button -->
                 <button *ngIf="!editMode" mat-icon-button (click)="editMode = !editMode">
                     <mat-icon>edit</mat-icon>
                 </button>     
                 <button *ngIf="editMode" mat-icon-button (click)="updateGroceryList()">
                     <mat-icon>check</mat-icon>
-                </button>     
+                </button>
+
+                <!-- Menu to change color and delete list -->
                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Color panel">
                     <mat-icon>more_vert</mat-icon>
                 </button>
@@ -26,14 +34,20 @@
             </div>
         </div>
 
+        <!-- Grocery items -->
         <ng-container *ngFor="let item of groceryListData?.items">
             <rideco-grocery-item [item]="item" [listId]="groceryListData?._id || ''" (updated)="getGroceryList(groceryListData._id)"></rideco-grocery-item>
         </ng-container>
+
+        <!-- Add new grocery item -->
         <div id="new-grocery-item" fxLayout="row" fxLayoutAlign="space-between center">
+            <!-- Input box -->
             <div class="w-100" fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon id="plus-icon">add</mat-icon>
                 <input [formControl]="newItem" fxFlex type="text" maxlength="255" placeholder="Add item"/>
             </div>
+
+            <!-- Save button -->
             <button [disabled]="!newItem.value" mat-icon-button aria-label="Edit item" (click)="addItemToGroceryList()">
                 <mat-icon>check</mat-icon>
             </button>
@@ -41,6 +55,7 @@
     </div>
 </div>
 
+<!-- Loading indicator for initial fetch -->
 <ng-template #loading>
     <div fxLayout="row" fxLayoutAlign="center center">
         <span>Loading...</span>

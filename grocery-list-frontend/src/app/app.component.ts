@@ -10,6 +10,7 @@ import {environment} from 'src/environments/environment';
 export class AppComponent {
 
   constructor(private title: Title) {
+    // Update the title of the page
     this.title.setTitle('Grocery List');
     console.log(environment.apiURL);
   }

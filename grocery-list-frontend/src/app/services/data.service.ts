@@ -9,13 +9,16 @@ import {ApiService} from './api.service';
 })
 export class DataService {
 
+  // Loading indicator for data fetch
   private _isGrocerListsLoading = false;
 
+  // Observable to store the data
   private _groceryLists = new BehaviorSubject<GroceryList[] | null>(null);
 
   constructor(private api: ApiService, private snackBar: MatSnackBar) {
   }
 
+  /** Getter method of loading indicator */
   public get isGrocerListsLoading(): boolean {
     return this._isGrocerListsLoading;
   }
@@ -24,6 +27,7 @@ export class DataService {
     return this._groceryLists.asObservable();
   }
 
+  /** Fetch grocery lists from API and store in it observable */
   loadGroceryLists(): void {
     this._isGrocerListsLoading = true;
     this.api.fetchAllGroceryList().subscribe({
