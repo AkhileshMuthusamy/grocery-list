@@ -8,7 +8,7 @@
             <span>Last updated: {{list.last_updated | date:'medium'}}</span>
         </div>
     </ng-container>
-    <div *ngIf="!data" id="no-records">
+    <div *ngIf="!data || data?.length == 0" id="no-records">
         <span>No list to display.</span>
     </div>
 </div>
