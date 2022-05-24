@@ -8,7 +8,12 @@
             <span>Last updated: {{list.last_updated | date:'medium'}}</span>
         </div>
     </ng-container>
-    <div *ngIf="!data || data?.length == 0" id="no-records">
+    <div *ngIf="(!data || data?.length == 0) && !dataService.isGrocerListsLoading" class="no-records">
         <span>No list to display.</span>
+    </div>
+    <div *ngIf="dataService.isGrocerListsLoading" class="no-records">
+        <span>Connecting to the server...</span>
+        <br />
+        <span>Note: It takes about 2 minutes for the backend Heroku server to wake up from sleep.</span>
     </div>
 </div>

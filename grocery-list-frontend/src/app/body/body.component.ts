@@ -15,7 +15,7 @@ export class BodyComponent implements OnInit, OnDestroy {
   subscription$!: Subscription;
 
   constructor(
-    private dataService: DataService,
+    public dataService: DataService,
     private router: Router) { }
 
   ngOnInit(): void {
