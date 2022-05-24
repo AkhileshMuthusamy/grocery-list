@@ -1,11 +1,14 @@
-<div>
+<div class="p-2">
     <ng-container *ngFor="let list of data">
         <div class="list-card" [style]="{'background-color': list?.color, 'color': 'white'}" (click)="openList(list)">
             <div>
-                <h1 fxFlex>{{list.title}}</h1>
+                <h1 fxFlex class="card-title">{{list.title}}</h1>
                 <span>{{list.items?.length || 0}} items</span>
             </div>
             <span>Last updated: {{list.last_updated | date:'medium'}}</span>
         </div>
     </ng-container>
+    <div *ngIf="!data" id="no-records">
+        <span>No list to display.</span>
+    </div>
 </div>

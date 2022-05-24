@@ -8,4 +8,17 @@
         cursor: pointer;
         filter: brightness(95%);
     }
+
+    .card-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+#no-records {
+    color: gray;
+    text-align: center;
+    font-size: larger;
+    padding-top: 50px;
 }
