@@ -1,6 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {RouterTestingModule} from '@angular/router/testing';
+import {ApiService} from '../services/api.service';
 
-import { GroceryListComponent } from './grocery-list.component';
+import {GroceryListComponent} from './grocery-list.component';
 
 describe('GroceryListComponent', () => {
   let component: GroceryListComponent;
@@ -8,9 +13,11 @@ describe('GroceryListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroceryListComponent ]
+      imports: [HttpClientTestingModule, ReactiveFormsModule, MatSnackBarModule, RouterTestingModule],
+      declarations: [GroceryListComponent],
+      providers: [ApiService]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

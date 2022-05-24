@@ -1,6 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {RouterTestingModule} from '@angular/router/testing';
+import {ApiService} from '../services/api.service';
+import {DataService} from '../services/data.service';
+import {BodyComponent} from './body.component';
 
-import { BodyComponent } from './body.component';
 
 describe('BodyComponent', () => {
   let component: BodyComponent;
@@ -8,7 +13,9 @@ describe('BodyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BodyComponent ]
+      imports: [HttpClientTestingModule, MatSnackBarModule, RouterTestingModule],
+      declarations: [ BodyComponent ],
+      providers: [ApiService, DataService]
     })
     .compileComponents();
   });
