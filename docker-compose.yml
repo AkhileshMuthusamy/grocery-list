@@ -24,11 +24,9 @@ services:
     container_name: gl-backend
     environment:
       - FLASK_APP=app.py
+      - FLASK_ENV=production
       - FLASK_RUN_HOST=0.0.0.0
-      - MONGODB_DATABASE=${DB_NAME}
-      - MONGODB_USERNAME=${DB_USER}
-      - MONGODB_PASSWORD=${DB_PASSWORD}
-      - MONGODB_HOSTNAME=mongodb
+      - MONGO_URI=${MONGO_URI}
     ports:
       - 5000:5000
     depends_on:
