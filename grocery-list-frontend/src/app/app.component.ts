@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 import {environment} from 'src/environments/environment';
 
 @Component({
@@ -8,7 +9,8 @@ import {environment} from 'src/environments/environment';
 })
 export class AppComponent {
 
-  constructor() {
+  constructor(private title: Title) {
+    this.title.setTitle('Grocery List');
     console.log(environment.apiURL);
   }
 }
