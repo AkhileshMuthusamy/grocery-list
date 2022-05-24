@@ -25,7 +25,7 @@
     </div>
 
     <ng-container *ngFor="let item of groceryListData?.items">
-        <rideco-grocery-item [item]="item" [listId]="groceryListData?._id || ''"></rideco-grocery-item>
+        <rideco-grocery-item [item]="item" [listId]="groceryListData?._id || ''" (updated)="getGroceryList(groceryListData._id)"></rideco-grocery-item>
     </ng-container>
     <div id="new-grocery-item" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="w-100" fxLayout="row" fxLayoutAlign="start center">

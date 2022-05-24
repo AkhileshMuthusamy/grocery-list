@@ -60,7 +60,6 @@ export class GroceryListComponent implements OnInit, OnDestroy {
    * @param _id Unique id of grocery list
    */
   getGroceryList(_id: string): void {
-    console.log('trigger')
     this.isLoading = true;
     this.api.fetchGroceryList(_id).subscribe({
       next: (res: APIResponse<GroceryList[]>) => {
@@ -87,7 +86,6 @@ export class GroceryListComponent implements OnInit, OnDestroy {
         next: (res) => {
           if ("error" in res) {
             this.snackBar.open('Unable to delete list', 'Close', {duration: 2000});
-            this.isLoading = false;
           }
         },
         complete: () => {
@@ -110,7 +108,6 @@ export class GroceryListComponent implements OnInit, OnDestroy {
         next: (res) => {
           if ("error" in res) {
             this.snackBar.open('Unable to update list', 'Close', {duration: 2000});
-            this.isLoading = false;
           } else if ("data" in res) {
             if (res.data['modified_count'] > 0) {
               this.getGroceryList(this.groceryListData._id);

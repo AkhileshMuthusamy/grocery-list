@@ -5,13 +5,20 @@
                 {{groceryItemForm.controls['name'].value}}
             </span>
         </ng-container>
-        <input [fxHide]="!editMode" formControlName="name" type="text" maxlength="255" placeholder="Edit item"/>
+        <input [fxHide]="!editMode" class="w-100" formControlName="name" type="text" maxlength="255" placeholder="Edit item"/>
     </mat-checkbox>
     <div>
-        <button mat-icon-button aria-label="Edit item" (click)="editMode = !editMode">
-            <mat-icon>{{ editMode ? 'check': 'edit'}}</mat-icon>
+        <button *ngIf="!editMode" mat-icon-button (click)="editMode = !editMode" matTooltip="Edit item">
+            <mat-icon>edit</mat-icon>
+        </button>     
+        <button *ngIf="editMode" [disabled]="isLoading" mat-icon-button (click)="updateGroceryItem()" matTooltip="Save item">
+            <mat-icon *ngIf="!isLoading">check</mat-icon>
+            <mat-icon *ngIf="isLoading">
+                <mat-spinner color="warn" diameter="20"></mat-spinner>
+            </mat-icon>
+            
         </button>
-        <button mat-icon-button aria-label="Delete item" (click)="true">
+        <button mat-icon-button aria-label="Delete item" (click)="deleteGroceryItem()" matTooltip="Delete item">
             <mat-icon>delete</mat-icon>
         </button>
     </div>

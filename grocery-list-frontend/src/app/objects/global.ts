@@ -28,3 +28,10 @@ export interface POSTReqGroceryItem {
     _id: string;
     name: string
 }
+
+export interface PUTReqGroceryItem {
+    _id: string;
+    id: string;
+    name: string;
+    purchased: boolean;
+}
