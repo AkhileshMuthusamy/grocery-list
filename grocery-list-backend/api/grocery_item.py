@@ -18,8 +18,8 @@ put_grocery_item_parser.add_argument('name', required=True, type=str, help="Fiel
 put_grocery_item_parser.add_argument('purchased', required=True, type=bool, help="Field required")
 
 delete_grocery_item_parser = reqparse.RequestParser()
-delete_grocery_item_parser.add_argument('_id', required=True, type=str, help="Field required") # Grocery List id
-delete_grocery_item_parser.add_argument('id', required=True, type=str, help="Field required") # Grocery Item id
+delete_grocery_item_parser.add_argument('_id', required=True, type=str, help="Field required", location='args') # Grocery List id
+delete_grocery_item_parser.add_argument('id', required=True, type=str, help="Field required", location='args') # Grocery Item id
 
 class GroceryItem(Resource):
     """ Endpoint to CREATE UPDATE READ DELETE grocery item
@@ -78,7 +78,7 @@ class GroceryItem(Resource):
         args = put_grocery_item_parser.parse_args()
 
         try:
-            if args['_id'] and args['id'] and args['name'] and args['purchased']:
+            if args['_id'] and args['id'] and args['name']:
                 response = mongo.db.groceryList.update_one(
                     {'_id': ObjectId(args['_id']), 'items.id': ObjectId(args['id'])},
                     {

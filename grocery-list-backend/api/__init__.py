@@ -16,9 +16,10 @@ flask_api = Api(app)
 CORS(app)
 
 from api import home
-from api.grocery_list import GroceryList
+from api.grocery_list import GroceryListByID, GroceryList
 from api.grocery_item import GroceryItem
 
 
 flask_api.add_resource(GroceryList, '/grocery-list')
+flask_api.add_resource(GroceryListByID, '/grocery-list/<string:_id>')
 flask_api.add_resource(GroceryItem, '/grocery-item')
