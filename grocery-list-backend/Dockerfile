@@ -14,4 +14,4 @@ EXPOSE 5000
 # Copy source code to container
 COPY . .
 
-CMD [ "gunicorn", "app:app" ]
+CMD [ "gunicorn", "app:app", "--bind", "0.0.0.0:5000" ]
