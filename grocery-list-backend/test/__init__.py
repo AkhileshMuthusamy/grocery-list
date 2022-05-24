@@ -12,7 +12,6 @@ class BaseCase(unittest.TestCase):
 
 
     def tearDown(self):
-        # Delete Database collections after the test is complete
-        print('REACHED HERE', self.db)
-        # for collection in self.db.list_collection_names():
-            # self.db.drop_collection(collection)
+        # Delete Database documents after the test is complete
+        response = mongo.db.groceryList.delete_many({'color': '#TEST'})
+        print('RESPONSE DELETED COUNT:', response.deleted_count)
