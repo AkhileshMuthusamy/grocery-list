@@ -22,7 +22,7 @@ delete_grocery_item_parser.add_argument('_id', required=True, type=str, help="Fi
 delete_grocery_item_parser.add_argument('id', required=True, type=str, help="Field required", location='args') # Grocery Item id
 
 class GroceryItem(Resource):
-    """ Endpoint to CREATE UPDATE READ DELETE grocery item
+    """ Endpoint to CREATE UPDATE DELETE grocery item
     """
 
     def post(self):
@@ -34,6 +34,7 @@ class GroceryItem(Resource):
 
         try:
             if args['_id'] and args['name']:
+                # Query to insert item in grocery list document
                 response = mongo.db.groceryList.update_one(
                     {'_id': ObjectId(args['_id'])},
                     {
@@ -79,6 +80,7 @@ class GroceryItem(Resource):
 
         try:
             if args['_id'] and args['id'] and args['name']:
+                # Query to update item in grocery list document
                 response = mongo.db.groceryList.update_one(
                     {'_id': ObjectId(args['_id']), 'items.id': ObjectId(args['id'])},
                     {
@@ -112,7 +114,7 @@ class GroceryItem(Resource):
 
 
     def delete(self):
-        """ DELETE request to update item in grocery list
+        """ DELETE request to remove item from grocery list
         """
 
         # Fetches request fields or returns HTTP 400 error
@@ -120,6 +122,7 @@ class GroceryItem(Resource):
 
         try:
             if args['_id'] and args['id']:
+                # Query to remove item from grocery list document
                 response = mongo.db.groceryList.update_one(
                     {'_id': ObjectId(args['_id'])},
                     {

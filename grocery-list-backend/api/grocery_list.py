@@ -26,6 +26,7 @@ class GroceryListByID(Resource):
         """ GET request to fetch grocery list by _id
         """
         try:
+            # Query to find document with matching id
             records = mongo.db.groceryList.find({'_id': ObjectId(_id)})
             return make_response(jsonify({
                 'data': list(records)
@@ -45,6 +46,7 @@ class GroceryList(Resource):
         """
 
         try:
+            # Query to return all documents from collection
             records = mongo.db.groceryList.find({})
             return make_response(jsonify({
                 'data': list(records)
@@ -67,6 +69,7 @@ class GroceryList(Resource):
 
         try:
             if args['title'] and args['color']:
+                # Query to insert document into grocery list collection
                 response = mongo.db.groceryList.insert_one({
                     'title': args['title'],
                     'color': args['color'],
@@ -102,6 +105,7 @@ class GroceryList(Resource):
 
         try:
             if args['_id'] and args['title'] and args['color']:
+                # Query to update document with matching id
                 response = mongo.db.groceryList.update_one(
                     {'_id': ObjectId(args['_id'])},
                     {'$set': {
@@ -141,6 +145,7 @@ class GroceryList(Resource):
 
         try:
             if args['_id']:
+                # Query to delete document with matching id
                 response = mongo.db.groceryList.delete_one(
                     {'_id': ObjectId(args['_id'])}
                 )
