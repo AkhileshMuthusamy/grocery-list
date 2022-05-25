@@ -12,3 +12,16 @@
 * Backend: Heroku (<https://rideco-grocery-list.herokuapp.com/>)
 * Database: MongoDB Atlas
 
+## Run Unit Test
+
+Frontend: Karma + Jasmine
+
+```sh
+ng test
+```
+
+Backend: PyTest
+
+```sh
+pytest -v
+```
